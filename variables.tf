@@ -29,3 +29,7 @@ variable "service_memory" {
 variable "service_listener" {
   type = string
 }
+
+variable "service_task_execution_role" {
+  type = string
+}
