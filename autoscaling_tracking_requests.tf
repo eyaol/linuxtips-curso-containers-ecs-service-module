@@ -1,7 +1,7 @@
 resource "aws_appautoscaling_policy" "target_tracking_requests" {
   count = var.scale_type == "requests_tracking" ? 1 : 0
 
-  name = format("%s-$s-cpu-tracking", var.cluster_name, var.service_name)
+  name = format("%s-%s-cpu-tracking", var.cluster_name, var.service_name)
 
   resource_id        = aws_appautoscaling_target.main.resource_id
   service_namespace  = aws_appautoscaling_target.main.service_namespace
