@@ -23,6 +23,11 @@ variable "private_subnets" {
 #
 # ECS variables
 #
+variable "container_image" {
+  type = string
+  description = "imagem com tag para deployment da aplicação no ECS"
+}
+
 variable "service_name" {
 
 }
