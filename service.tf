@@ -13,12 +13,12 @@ resource "aws_ecs_service" "main" {
     enable   = true
     rollback = true
   }
-  
+
   dynamic "capacity_provider_strategy" {
     for_each = var.service_launch_type
     content {
       capacity_provider = capacity_provider_strategy.value.capacity_provider
-      weight = capacity_provider_strategy.value.weight
+      weight            = capacity_provider_strategy.value.weight
     }
   }
 

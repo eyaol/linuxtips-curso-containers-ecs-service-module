@@ -24,8 +24,9 @@ variable "private_subnets" {
 # ECS variables
 #
 variable "container_image" {
-  type = string
+  type        = string
   description = "imagem com tag para deployment da aplicação no ECS"
+  default     = ""
 }
 
 variable "service_name" {
@@ -84,27 +85,38 @@ variable "service_hosts" {
 # Task definition variables
 #
 variable "environment_variables" {
+  type = list(object({
+    name : string
+    value : string
+  }))
+  description = "Lista de variáveis de ambiente que serão passadas para o serviço"
+}
 
+variable "secrets" {
+  type = list(object({
+    name : string
+    valueFrom : string
+  }))
+  description = "Lista de secrets do parameter store ou do secrets manager"
 }
 
 variable "capabilities" {
-    type = list(string)
+  type = list(string)
 }
-
 
 #
 # Task Auto Scaling
 #
 variable "scale_type" {
-    default = null
+  default = null
 }
 
 variable "task_minimum" {
-    default = 2
+  default = 2
 }
 
 variable "task_maximum" {
-    default = 5
+  default = 5
 }
 
 #
@@ -112,31 +124,31 @@ variable "task_maximum" {
 #
 
 variable "scale_out_cpu_threshold" {
-    default = 80
+  default = 80
 }
 
 variable "scale_out_adjustment" {
-    default = 1
+  default = 1
 }
 
 variable "scale_out_comparison_operator" {
-    default = "GreatherThanOrEqualToThreshold"
+  default = "GreatherThanOrEqualToThreshold"
 }
 
 variable "scale_out_statistic" {
-    default = "Average"
+  default = "Average"
 }
 
 variable "scale_out_period" {
-    default = 60
+  default = 60
 }
 
 variable "scale_out_evaluation_periods" {
-    default = 2
+  default = 2
 }
 
 variable "scale_out_cooldown" {
-    default = 60
+  default = 60
 }
 
 #
@@ -144,41 +156,41 @@ variable "scale_out_cooldown" {
 #
 
 variable "scale_in_cpu_threshold" {
-    default = 30
+  default = 30
 }
 
 variable "scale_in_adjustment" {
-    default = -1
+  default = -1
 }
 
 variable "scale_in_comparison_operator" {
-    default = "LessThanEqualToThreshold"
+  default = "LessThanEqualToThreshold"
 }
 
 variable "scale_in_statistic" {
-    default = "Average"
+  default = "Average"
 }
 
 variable "scale_in_period" {
-    default = 120
+  default = 120
 }
 
 variable "scale_in_evaluation_periods" {
-    default = 3
+  default = 3
 }
 
 variable "scale_in_cooldown" {
-    default = 120
+  default = 120
 }
 
 variable "scale_tracking_cpu" {
-    default = 80 
+  default = 80
 }
 
 variable "alb_arn" {
-    default = null
+  default = null
 }
 
 variable "scale_tracking_requests" {
-    default = 0
+  default = 0
 }
